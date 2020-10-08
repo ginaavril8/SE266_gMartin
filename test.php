@@ -1,4 +1,4 @@
 <?php
     .echo "PHP Rocks";
-//Testin comment; don't really edit from github
+//Test comment; don't really edit from github
 ?>
