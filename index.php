@@ -20,7 +20,7 @@
 
 <!--Navigation Bar-->
     <div class="nav">	  
-        <a class="btns" href="localhost/se266/index.php">All Signments</a>        
+        <a class="btns" href="index.php">All Signments</a>        
         <a class="btns" href="githubR.php">GitHub Resources</a>   
         <a class="btns" href="phpR.php">PHP References</a>  
         <a class="btns" href="gitRepo.php">My GitHub Repo</a>  
