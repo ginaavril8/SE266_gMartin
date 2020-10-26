@@ -36,7 +36,7 @@
 <ul>
 <li><a href="W1/index.php">Week 1</a></li>
 <li><a href="W2/index.php">Week 2</a></li>
-<li><a href="W3/index.php">Week 3</a></li>
+<li><a href="W3/atm.php">Week 3</a></li>
 <li><a href="W4/index.php">Week 4</a></li>
 <li><a href="W5/index.php">Week 5</a></li>
 <li><a href="W6/index.php">Week 6</a></li>
