@@ -19,8 +19,8 @@
 
 <!--Navigation Bar-->
     <div class="nav">	  
-        <a class="btns" href="http://localhost/se266/index.php">All Signments</a>        
-        <a class="btns" href="http://localhost/se266/githubR.php">GitHub Resources</a>   
+        <a class="btns" href="http://localhost/se266_gMartin/index.php">All Signments</a>        
+        <a class="btns" href="githubR.php">GitHub Resources</a>   
         <a class="btns" href="phpR.php">PHP References</a>  
         <a class="btns" href="gitRepo.php">My GitHub Repo</a>  
         <a class="btns" href="otherThings.php">Other Things</a>  
