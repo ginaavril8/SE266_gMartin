@@ -44,7 +44,7 @@
     ?>
 
 
-    <table class="center">
+    <table class="center" style="text-align:center">
             <thead>
                 <tr>
                     <th>ID</th>

@@ -69,8 +69,8 @@ error_reporting(E_ALL ^ E_WARNING);
 
     <div class="">
     <label>Married</label> 
-    <input type="radio" id="mStatus" name="mStatus" value="1" ></input>
-    <input type="radio" id="mStatus" name="mStatus" value="0" ></input></br>
+    <input type="radio" id="mStatus" name="mStatus" value="1" >Yes</input>
+    <input type="radio" id="mStatus" name="mStatus" value="0" >No</input></br>
     <br>
     </div>
     
