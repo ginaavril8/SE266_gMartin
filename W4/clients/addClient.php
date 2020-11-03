@@ -2,17 +2,19 @@
 <?php
 error_reporting(E_ALL ^ E_WARNING); 
         
-        include __DIR__ . '/model/model_clients.php';
+        include __DIR__ . '/model/model_clients.php';  
         include __DIR__ . '/functions.php';
         
        if (isPostRequest()) {
 
          // $patients = filter_input(INPUT_POST, 'patient')
-           $fName = filter_input(INPUT_POST, 'Firs Name');
-           $lName = filter_input(INPUT_POST, 'Last Name');
-           $mStatus = filter_input(INPUT_POST, 'Status');
-           $bDate = filter_input(INPUT_POST, 'Birth Date');
-
+           $fName = filter_input(INPUT_POST, 'FirstName');
+           $lName = filter_input(INPUT_POST, 'LastName');
+           //$mStatus = filter_input(INPUT_POST, 'mStatus');
+           $mStatus = filter_input(INPUT_POST, 'mStatus');;
+           $bDate = filter_input(INPUT_POST, 'BirthDate');
+           
+          
            $result = addClient ($fName, $lName, $mStatus, $bDate);
            
        }
@@ -55,11 +57,11 @@ error_reporting(E_ALL ^ E_WARNING);
 
     <div class="">
     <label>First Name</label> 
-    <input type="text" value="" name="fName" /><br />
+    <input type="text" id="FirstName" value="" name="FirstName" /><br />
     <br>
 
     <label>Last Name</label> 
-    <input type="text" value="" name="lName" /><br />
+    <input type="text" id="LastName" value="" name="LastName" /><br />
     <br>
 
     </div>
@@ -67,18 +69,17 @@ error_reporting(E_ALL ^ E_WARNING);
 
     <div class="">
     <label>Married</label> 
-    <input type="radio" value="Y" name="mStatus" >Yes</input>
-    <input type="radio" value="N" name="mStatus" >No</input></br>
+    <input type="radio" id="mStatus" name="mStatus" value="1" ></input>
+    <input type="radio" id="mStatus" name="mStatus" value="0" ></input></br>
     <br>
     </div>
     
 
     <div class="">
     <label>DOB </label>
-<input type="date" name="dateOfBirth" value="dob"><br>
+<input type="date" id="BirthDate" name="BirthDate" value="dob"><br>
     </br>
     </div>
-
 
 
     <div class="">        

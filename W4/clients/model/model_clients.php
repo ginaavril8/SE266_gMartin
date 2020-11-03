@@ -2,14 +2,20 @@
 
     include (__DIR__ . '/db.php');
     
+    error_reporting(E_ALL ^ E_WARNING); 
+
     
+
+
     function getClients () {
         global $db;
         
         $results = [];
 
-        $stmt = $db->prepare('SELECT id, clientFirstName, clientLastName, clientMarried, clientBirthDate, clientAge FROM clients'); 
-        
+        $stmt = $db->prepare('SELECT id, clientFirstName, clientLastName, clientMarried, clientBirthDate FROM clients'); 
+        //var_dump($stmt);
+        //exit;
+    
         if ( $stmt->execute() && $stmt->rowCount() > 0 ) {
              $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                  
@@ -18,30 +24,44 @@
          return ($results);
     }
     
+    //$clients = getClients();
+
+
+
+
 
     
     function addClient ($fName, $lName, $mStatus, $bDate) {
         global $db;
         $results = "Not added";
 
-        $stmt = $db->prepare("INSERT INTO clients SET clientFirstName = 'First Name: ', clientLastName = 'Last Name: ', clientMarried = 'Status: ', clientBirthDate = 'Birth Date: ', clientAge = 'Age'");
+
+        $stmt = $db->prepare("INSERT INTO clients SET clientFirstName = :FirstName, clientLastName = :LastName, clientMarried = :mStatus, clientBirthDate = :BirthDate");
 
         $binds = array(
-            "First Name: " => $fName,
-            "Last Name: " => $lName,
-            "Status: " => $mStatus,
-            "Birth Date: " => $bDate,
-            "Age: " => $currAge
-
+            ":FirstName" => $fName,
+            ":LastName" => $lName,
+            ":mStatus" => $mStatus,
+            ":BirthDate" => $bDate,
+            
         );
-        
-        
+
+            //var_dump($binds);
+           // exit;
+
         if ($stmt->execute($binds) && $stmt->rowCount() > 0) {
             $results = 'Data Added';
         }
         
         return ($results);
     }
+
+
+
+      /*$results = addClient ('Olivia', 'Reed', 0, '1950-7-8', '70');
+      $clients = getClients();
+      var_dump ($clients);*/
+    
    
 
     /*function addClient2 ($t, $d) {
@@ -63,10 +83,5 @@
        
         return ($results);
     }*/
-   
-  
-     // $result = addClients ('Greg', 'Matthews', '1', '1999-3-3');
-     // echo $result;
-  
-     ?> 
+?>
 

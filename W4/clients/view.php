@@ -1,11 +1,4 @@
 
-<?php
-        
-        include __DIR__ . '/model/model_clients.php';
-        $clients = getClients ();
-        
-    ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -42,6 +35,15 @@
     <div>
         <h1>Patients</h1>
 
+        <?php
+        
+        include __DIR__ . '/model/model_clients.php';
+        include __DIR__ . '/functions.php';
+        $clients = getClients ();
+        
+    ?>
+
+
     <table class="center">
             <thead>
                 <tr>
@@ -54,15 +56,18 @@
                 </tr>
             </thead>
             <tbody>
-            
+        
+ 
+
             <?php foreach ($clients as $row): ?>
                 <tr>
                     <td><?php echo $row['id']; ?></td>
                     <td><?php echo $row['clientFirstName']; ?></td>
                     <td><?php echo $row['clientLastName']; ?></td>       
-                    <td><?php echo $row['clientMarried']; ?></td>  
+                    <td><?php echo relStatus($row['clientMarried']); ?></td>  
                     <td><?php echo $row['clientBirthDate']; ?></td>    
-                    <td><?php echo $row['clientAge']; ?></td> 
+                    <td><?php echo age($row['clientBirthDate']); ?></td> 
+                    
 
                 
                 </tr>
