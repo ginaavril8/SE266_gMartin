@@ -123,7 +123,7 @@
         global $db;
         
         $results = [];
-        $stmt = $db->prepare('SELECT clientId, clientMeasurementId, clientMeasurementDate, clientWeight, clientHeight, clientBPSystolic, clientBPDiastolic, clientTemperature FROM clientMeasurements');
+        $stmt = $db->prepare('SELECT clientMeasurementId, clientId, clientMeasurementDate, clientWeight, clientHeight, clientBPSystolic, clientBPDiastolic, clientTemperature FROM clientMeasurements');
         //try "id" here if it doesnt work or 'clientMeasurementId'
 
 
@@ -138,12 +138,20 @@
 
 
     function addClientMeasurements ($cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp) { //$id removed
+        //function addClientMeasurements ($cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp) { //$id removed
         global $db;
+
+        //clientMeasurementId, clientId, clientMeasurementDate, clientWeight, clientHeight, clientBPSystolic, clientBPDiastolic, clientTemperature
+
         
         $results = "Not added";
     
-        $stmt = $db->prepare('INSERT INTO clientMeasurements SET clientId = :clientId, clientMeasurementDate = :cDate, clientWeight = :cWeight, clientHeight = :cHeight, clientBPSystolic = :bpSystolic, clientBPDiastolic = :dpDiastolic, clientTemperature = :cTemp;');
+        //$stmt = $db->prepare('INSERT INTO clientMeasurements SET clientId = :clientId, clientMeasurementDate = :cDate, clientWeight = :cWeight, clientHeight = :cHeight, clientBPSystolic = :bpSystolic, clientBPDiastolic = :dpDiastolic, clientTemperature = :cTemp;');
 
+        $stmt = $db->prepare('INSERT INTO clientMeasurements SET clientMeasurementId = ":clientMeasurementId", clientId = ":clientId", clientMeasurementDate  = ":cDate", clientWeight = ":cWeight", clientHeight = ":cHeight", clientBPSystolic = ":bpSystolic", clientBPDiastolic = ":dpDiastolic", clientTemperature = "cTemp"');
+
+
+        $stmt->bindValue(':clientMeasurementId', $clientMeasurementId);
         $stmt->bindValue(':clientId', $clientId);
         $stmt->bindValue(':cDate', date(y-m-d));
         $stmt->bindValue(':cWeight', $cWeight);
