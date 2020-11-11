@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>W6</title>
+<title>Other Things</title>
 <!-- Link to external Stylesheet -->
 <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -13,25 +13,30 @@
 
 <!-- Header Div -->      
 <div class="header"> 
-<h2>W6</h2>
+<h2>PHP & MySQL</h2>
 </div><!-- End Header Div -->
 
 
 <!--Navigation Bar-->
     <div class="nav">	  
-        <a class="btns" href="https://se266gam.herokuapp.com/">All Signments</a>        
-        <a class="btns" href="githubR.php">GitHub Resources</a>   
+        <a class="btns" href="https://se266gam.herokuapp.com/">All Signments</a>
+        <a class="btns" href="githubR.php">GitHub Resources</a>    
         <a class="btns" href="phpR.php">PHP References</a>  
-        <a class="btns" href="gitRepo.php">My GitHub Repo</a>  
+        <a class="btns" href="gitRepo.php">My GitHub Repo</a> 
         <a class="btns" href="otherThings.php">Other Things</a>  
 
     </div><!-- end botton-container -->	   
-       
- <!-- Container Div -->
-<div class="container">  
+        
 
 
 
+<!-- Container Div -->
+<div class="container">
+<ul>
+<li><a href="https://www.youtube.com/">YouTube</a></li>
+<li><a href="https://www.reddit.com/">Reddit</a></li>
+<li><a href="https://apps.apple.com/us/app/apple-podcasts/id525463029">Podcasts</a></li>
+</ul>
 </div> <!-- End Container Div -->
 
 

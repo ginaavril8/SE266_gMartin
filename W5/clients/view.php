@@ -3,10 +3,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>W5 | View Patients</title>
+<title>W5 | View Clients</title>
 
 <!-- Link to external Stylesheet -->
 <link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
 
@@ -15,13 +17,13 @@
 
 <!-- Header Div -->     
 <div class="header"> 
-<h2>View Patients</h2>
+<h2>View Clients</h2>
 </div> <!-- End Header Div -->
 
 
 <!-- Navigation Bar -->
     <div class="nav">	  
-        <a class="btns" href="http://localhost/se266_gMartin/index.php">All Signments</a>        
+        <a class="btns" href="https://se266gam.herokuapp.com/">All Signments</a>        
         <a class="btns" href="githubR.php">GitHub Resources</a>   
         <a class="btns" href="phpR.php">PHP References</a>  
         <a class="btns" href="gitRepo.php">My GitHub Repo</a>  
@@ -30,69 +32,62 @@
     </div> <!-- end botton-container -->	   
        
  <!-- Container Div -->
+
 <div class="container" style="text-align:center;"> 
+    <h1>Clients</h1>
 
-    <div>
-        <h1>Patients</h1>
+    <?php
+    
+    include __DIR__ . '/model/model_clients.php';
+    include __DIR__ . '/functions.php';
 
-        <?php
-        
-        include __DIR__ . '/model/model_clients.php';
-        include __DIR__ . '/functions.php';
-        include __DIR__ . '/W4\clients/addClient.php';
-        //$clients = getClients ();
-
-        if (isPostRequest()) {
-            $id = filter_input(INPUT_POST, 'id');
-            deleteClient ($id);
-        }
-        $clients = getClients ();
-        
-    ?>
+    if(isPostRequest())
+    {
+        $id = filter_input(INPUT_POST, 'id');
+        deleteClient($id);
+    }     
+    $clients = getClients ();
+    
+?>
 
 
-    <table class="center" style="text-align:center">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Status</th>
-                    <th>DOB</th>
-                    <th>Age</th>
-                   
-                </tr>
-            </thead>
-            <tbody>
-        
- 
+<table class="center" style="text-align:center">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Status</th>
+                <th>DOB</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($clients as $row): ?>
+            <tr>
 
-            <?php foreach ($clients as $row): ?>
-                <tr>
-                <form action="view.php" method="post">
-                    <td><?php echo $row['id']; ?></td>
-                    <td><?php echo $row['clientFirstName']; ?></td>
-                    <td><?php echo $row['clientLastName']; ?></td>       
-                    <td><?php echo relStatus($row['clientMarried']); ?></td>  
-                    <td><?php echo $row['clientBirthDate']; ?></td>    
-                    <td><?php echo age($row['clientBirthDate']); ?></td> 
-                    <td><a href="editClient.php?action=update&clientId=<?php echo $row['id']; ?>">Edit</a></td> 
+                <td><?php echo $row['id']; ?></td>
+                <td><?php echo $row['clientFirstName']; ?></td>
+                <td><?php echo $row['clientLastName']; ?></td>       
+                <td><?php echo relStatus($row['clientMarried']); ?></td>  
+                <td><?php echo $row['clientBirthDate']; ?></td>    
+                <td><?php echo age($row['clientBirthDate']); ?></td> 
                 
-                </form> 
+                <td><a href="editClient.php?action=update&clientId=<?php echo $row['id']; ?>">Edit</a></td> 
 
-                
-                </tr>
-
-
-                
-
-
-            <?php endforeach; ?>
-            </tbody>
-        </table>
-        
-        <br />
-        <a href="addClient.php">Add Client</a>
+                <td>
+                    <form action="view.php" method="post">
+                        <input type="hidden" name="id" value="<?= $row['id'] ?>"/>
+                        <button class="fa fa-remove" style="border:none; background-color:white;" type="submit"></button>
+                    </form>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+                    
+        <!--<a href="addClient.php">Add Client</a>-->
+        <a href="addClient.php?action=Add" id="add">Add Client</a><h1>
     </div>
     </div> <!-- End Container Div -->
 

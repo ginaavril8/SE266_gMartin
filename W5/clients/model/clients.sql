@@ -19,5 +19,11 @@ CREATE TABLE IF NOT EXISTS clients (
     clientBPSystolic SMALLINT,        
     clientBPDiastolic SMALLINT,        
     clientTemperature DECIMAL(5,2),        
- FOREIGN KEY (clientId) REFERENCES clients(id) ON DELETE CASCADE) 
- ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+    FOREIGN KEY (clientId) REFERENCES clients(id) ON DELETE CASCADE
+ 
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+
+
+
+ 

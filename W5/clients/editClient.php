@@ -2,75 +2,88 @@
 <?php
 error_reporting(E_ALL ^ E_WARNING); 
         
-        include __DIR__ . '/model/model_clients.php'; 
-        include __DIR__ . '/functions.php';
-        $clientMeasurements = getclientMeasurements (clientId);
-  
-
-if (isset($_GET['action'])) {
-            $action = filter_input(INPUT_GET, 'action');
-            $id = filter_input(INPUT_GET, 'clientId');
-
-            if ($action == "update") {
-              $row = getClient($id);
-              $fName = $row['clientFirstName'];
-              $lName = $row['clientLastName'];
-              $mStatus = $row['clientMarried'];
-              $bDate = $row['clientBirthDate'];
-
-
-              $cDate = $row['clientMeasurementDate'];
-              $cWeight = $row['clientWeight'];
-              $cHeight = $row['clientHeight'];
-              $bpSystolic = $row['clientBPSystolic'];
-              $dpDiastolic = $row['clientBPDiastolic'];
-              $cTemp = $row['clientTemperature'];
-
-          } else {
-            $fName = "";
-            $lName = "";
-            $mStatus = "";
-            $bDate = "";
-            $cDate = "";
-            $cWeight = "";
-            $cHeight = "";
-            $bpSystolic = "";
-            $dpDiastolic = "";
-            $cTemp = "";
-          }
-            
-            
-        } elseif (isset($_POST['action'])) {
-            $action = filter_input(INPUT_POST, 'action');
-            $id = filter_input(INPUT_POST, 'id'); //clientId
-            $fName = filter_input(INPUT_POST, 'FirstName');
-            $lName = filter_input(INPUT_GET, 'LastName');
-            $mStatus = filter_input(INPUT_GET, 'mStatus');;
-            $bDate = filter_input(INPUT_GET, 'BirthDate');
-            $cDate = filter_input(INPUT_GET, 'todaysDate');
-            $cWeight = filter_input(INPUT_GET, 'clientWeight');
-            $cHeight = filter_input(INPUT_GET, 'clientHeight');
-            $bpSystolic = filter_input(INPUT_GET, 'sPressure');
-            $dpDiastolic = filter_input(INPUT_GET, 'dPressure');
-            $cTemp = filter_input(INPUT_GET, 'clientTemp');
-        } 
-            
+include __DIR__ . '/model/model_clients.php';
+include __DIR__ . '/functions.php';
        
-       if (isPostRequest() && $action == "add") {
-       
-           $result = addClient ($fName, $lName, $mStatus, $bDate);
-          // header('Location: view.php');
-           
-       } elseif (isPostRequest() && $action == "update") {
-           $result = updateClient ($id, $fName, $lName, $mStatus, $bDate);
-          // header('Location: view.php');
-           
-       }       
-        elseif (isPostRequest() && $action == "delete") {
-        $result = deleteClient ($id, $fName, $lName, $mStatus, $bDate);
-       // header('Location: view.php');
         
-    }
+        $action = "";
+
+            // let's figure out if we're doing update or add
+            if (isset($_GET['action']))  
+            {
+                $action = filter_input(INPUT_GET, 'action');
+                $id = filter_input(INPUT_GET, 'clientId');
+
+                if ($action == "update") {
+                    $row = getClient($id);
+                    if ($action == "update") {
+                        $row = getClient($id);
+                        $fName = $row['clientFirstName'];
+                        $lName = $row['clientLastName'];
+                        $mStatus = $row['clientMarried'];
+                        $bDate = $row['clientBirthDate'];
+                        
+                      }
+                          else
+                          
+                          {
+          
+                          $fName = "";
+                          $lName = "";
+                          $mStatus = "";
+                          $bDate = "";
+                          $cDate = "";
+          
+                    
+                          }
+               }
+                        
+                else if (isset($_POST['action'])) {
+                    $action = filter_input(INPUT_POST, 'action');
+                    $id = filter_input(INPUT_POST, 'clientId'); 
+                    $fName = filter_input(INPUT_POST, 'FirstName');
+                    $lName = filter_input(INPUT_POST, 'LastName');
+                    $mStatus = filter_input(IINPUT_POST, 'mStatus');;
+                    $bDate = filter_input(INPUT_POST, 'BirthDate');
+                    $cDate = filter_input(INPUT_POST, 'todaysDate');
+                } 
+            
+            if (isset($_POST['addMesurments']))
+                {
+                   $id = filter_input(INPUT_GET, 'id'); 
+                   $cDate = filter_input(INPUT_POST, 'todaysDate');
+                   $cWeight = filter_input(INPUT_POST, 'clientWeight');
+                   $cHeight = filter_input(INPUT_POST, 'clientHeight');
+                   $bpSystolic = filter_input(INPUT_POST, 'sPressure');
+                   $dpDiastolic = filter_input(INPUT_POST, 'dPressure');
+                   $cTemp = filter_input(INPUT_POST, 'clientTemp');
+     
+                   $result = addClientMeasurements($id, $cDate, $cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp);
+                }
+            }
+
+         
+
+
+
+                if (isPostRequest() && $action == "add") {
+       
+                    $result = addClientMeasurements ($cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp);
+                    header('Location: view.php');
+                    
+                } else if (isPostRequest() && $action == "update") {
+                    $result = updateClientMeasurements ($id, $cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp);
+                    header('Location: view.php');
+                    
+                } else if (isset($_POST['delete'])){
+
+                    $del_id = filter_input(INPUT_POST, 'id');
+                    deleteClient($id);
+                    header('Location: view.php');
+            
+                }
+                
+            
     ?>
 
 
@@ -79,9 +92,11 @@ if (isset($_GET['action'])) {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>W5 | Edit Patient</title>
+<title>W5 | Edit Client</title>
  <!-- Link to external Stylesheet -->
 <link rel="stylesheet" type="text/css" href="style.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <body>
 
@@ -89,13 +104,13 @@ if (isset($_GET['action'])) {
 <div id="container"> 
 <!-- Header Div  -->    
 <div class="header"> 
-<h2>Edit Patient</h2>
+
 </div><!-- End Header Div -->
 
 
 <!--Navigation Bar -->
     <div class="nav">	  
-        <a class="btns" href="http://localhost/se266_gMartin/index.php">All Signments</a>        
+        <a class="btns" href="https://se266gam.herokuapp.com/">All Signments</a>        
         <a class="btns" href="githubR.php">GitHub Resources</a>   
         <a class="btns" href="phpR.php">PHP References</a>  
         <a class="btns" href="gitRepo.php">My GitHub Repo</a>  
@@ -105,26 +120,24 @@ if (isset($_GET['action'])) {
 
  <!-- Container Div -->
 <div class="container" style="text-align:center;"> 
-    
-  <h2>Edit Patient</h2>
+<h2>Edit Client</h2>
+</br>
+ 
 
-  <form class="" action="editClient.php" method="post">
-      <input type="hidden" name="action" value="<?php echo $action; ?>">
-      <input type="hidden" name="clientId" value="<?php echo $id; ?>">
+ <form name="patient" method="post" action="editClient.php" class="">
+        <input type="hidden" name="action" value="<?= $action ?>">
+        <input type="hidden" name="id" value="<?= $id ?>">
 
     <div class="">
     <label>First Name</label> 
-    <!-- <input type="text" id="FirstName" value="" name="FirstName" /><br /> -->
-
-    <input type="text" id="lName" placeholder="Name" name="" value="<?= $fName; ?>"></br>
-
-
-
+    <input type="text" name="FirstName" id="FirstName" value="<?= $fName ?>"></br>
     <br>
+ 
+ 
 
     <label>Last Name</label> 
     <!-- <input type="text" id="LastName" value="" name="LastName" /><br /> -->
-    <input type="text"  id="" placeholder="" name="" value="<?= $lName; ?>">
+    <input type="text"  id="LastName" placeholder="" name="LastName" value="<?= $lName ?>"></br>
     <br>
 
     </div>
@@ -140,71 +153,89 @@ if (isset($_GET['action'])) {
 
     <div class="">
     <label>DOB </label>
-<input type="date" id="BirthDate" name="BirthDate" value="<?= $bDate; ?>" ><br>
+<input type="date" id="BirthDate" name="BirthDate" value="<?= $bDate ?>"/><br>
     </br>
     </div>
 
 
+
+    <h2>Client Measurements</h2>
+
     <div class="">
     <label>Current Date</label> 
-    <input type="date" id="tDate" name="todaysDate" value="<?= $date?>" ><br>
+    <input type="date" id="todaysDate" name="todaysDate" value="<?= $date?>"/><br>
     <br>
     </div>
 
 
     <div class="">
     <label>Weight</label> 
-    <input type="text" id="cWeight" name="clientWeight" value="" ><br>
+    <input type="text" id="cWeight" name="clientWeight" style="width:50px;" value="<?= $cWeight ?>"/><br>
     <br>
     </div>    
     
     <div class="">
     <label>Height</label> 
-    <input type="text" id="cHeight" name="clientHeight" value=""><br>
+    <input type="text" id="cHeight" name="clientHeight" style="width:50px;" value="<?= $cHeight ?>"/><br>
     <br>
     </div> 
           
     <div class="">
     <label>Systolic Pressure</label> 
-    <input type="text" id="bpSystolic" name="sPressure" value=""><br>
+    <input type="text" id="bpSystolic" name="sPressure" style="width:30px;" value="<?= $bpSystolic ?>"/><br>
     <br>
     </div> 
     
     
     <div class="">
     <label>Diastolic Pressure</label> 
-    <input type="text" id="dpDiastolic" name="dPressure" value=""><br>
+    <input type="text" id="dpDiastolic" name="dPressure" style="width:30px;" value="<?= $dpDiastolic ?>"/><br>
     <br>
     </div> 
               
     <div class="">
     <label>Temperature</label> 
-    <input type="text" id="cTemp" name="clientTemp" value=""><br>
+    <input type="text" id="cTemp" name="clientTemp" value="<?= $cTemp ?>"/><br>
     <br>
     </div> 
 
 
-    <div class="">        
       <div class="">
-      <!--  <button type="submit" name="add" class="">Edit Client</button></br> -->
-        <button type="submit" class="" name="edit" value="">Update</button> 
+      <button type="submit" name="addMesurments" id="submit"><?= $action ?>Client</button>
+       <td>
+                    <form action="view.php" method="post">
+                        <input type="hidden" name="id" value="<?= $row['id'] ?>"/>
+                        <button class="fa fa-remove" style="border:none; background-color:white;" type="submit"></button>
+                    </form>
+                </td>
+      </div>
+
+
+      
+        
         <?php
             if (isPostRequest()) {
-                echo "Client Updated.";
+                echo "<br>Client Updated.";
             }
         ?>
-      </div>
-    </div>
 
     <table class="center" style="text-align:center">
             <thead>
-            <h2>Patient History</h2>
+            <h2>Client History</h2>
+
+            <?php
+            $id = filter_input(INPUT_GET, 'id');
+            $clientMeasurements = getClientMeasurements($id);
+        ?>
+
                 <tr>
+                    <th>App ID</th>
+                    <th>Date</th>
                     <th>Weight</th>
                     <th>Height</th>
-                    <th>Systolic Pressure</th>
-                    <th>Diastolic Pressure</th>
-                    <th>Diastolic Pressure</th>
+                    <th>Blood Pressure</th>
+                    <!--<th>Diastolic Pressure</th> -->
+                    <!-- <th>Diastolic Pressure</th> -->
                     <th>Temperature</th>
                    
                 </tr>
@@ -212,34 +243,21 @@ if (isset($_GET['action'])) {
             <tbody>
         
 
-            <?php foreach ($clientMeasurements as $row): ?>
+            <?php foreach ($clientMeasurements as $newRow): ?>
                 <tr>
-                <form action="view.php" method="post">
-                    <td><?php echo $row['id']; ?></td>
-                    <td><?php echo $row['clientMeasurementDate']; ?></td>
-                    <td><?php echo $row['clientWeight']; ?></td>       
-                    <td><?php echo $row['clientBPSystolic']; ?></td>  
-                    <td><?php echo $row['clientBPDiastolic']; ?></td>    
-                    <td><?php echo age($row['clientTemperature']); ?></td> 
-                    <td><a href="editClient.php?action=update&clientId=<?php echo $row['id']; ?>">Delete</a></td> 
-                
+                <form action="editClient.php?action=update&clientId=<?php $id ?>"  method="post">
+                    <td><?= $newRow['clientMeasurementId']; ?></td>
+                    <td><?= $newRow['clientMeasurementDate']; ?></td>
+                    <td><?= $newRow['clientWeight']; ?></td>  
+                    <td><?= $newRow['clientHeight']; ?></td>  
+                    <td><?= round(bmi($newRow['clientBPSystolic'], $newRow['clientBPDiastolic']),1) ?></td>
+                  <!--   <td><?= $newRow['clientBPSystolic']; ?> / <?= $newRow['clientBPDiastolic']; ?></td>     --> 
+                    <td><?=  $newRow['clientTemperature']; ?></td> 
                 </form> 
-                
                 </tr>
-
-
-            
-
             <?php endforeach; ?>
             </tbody>
         </table>
-
-
-
-
-
-
-
   </form>
   
   <div class=""><a href="./view.php">View Clients</a></div>
@@ -253,14 +271,9 @@ if (isset($_GET['action'])) {
 </footer>
 <!-- End Footer Div -->
 
-
-
 <script>
 document.getElementById("lastMod").innerHTML = document.lastModified;
 </script>
 
 </body>
-
-
-
 </html> 

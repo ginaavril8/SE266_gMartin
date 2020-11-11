@@ -5,8 +5,6 @@
     error_reporting(E_ALL ^ E_WARNING); 
 
     
-
-
     function getClients () {
         global $db;
         
@@ -28,8 +26,6 @@
 
 
 
-
-
     
     function addClient ($fName, $lName, $mStatus, $bDate) {
         global $db;
@@ -47,7 +43,7 @@
         );
 
             //var_dump($binds);
-           // exit;
+            //exit;
 
         if ($stmt->execute($binds) && $stmt->rowCount() > 0) {
             $results = 'Data Added';
