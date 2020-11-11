@@ -142,12 +142,9 @@
         global $db;
 
         //clientMeasurementId, clientId, clientMeasurementDate, clientWeight, clientHeight, clientBPSystolic, clientBPDiastolic, clientTemperature
-
-        
         $results = "Not added";
     
         //$stmt = $db->prepare('INSERT INTO clientMeasurements SET clientId = :clientId, clientMeasurementDate = :cDate, clientWeight = :cWeight, clientHeight = :cHeight, clientBPSystolic = :bpSystolic, clientBPDiastolic = :dpDiastolic, clientTemperature = :cTemp;');
-
         $stmt = $db->prepare('INSERT INTO clientMeasurements SET clientMeasurementId = ":clientMeasurementId", clientId = ":clientId", clientMeasurementDate  = ":cDate", clientWeight = ":cWeight", clientHeight = ":cHeight", clientBPSystolic = ":bpSystolic", clientBPDiastolic = ":dpDiastolic", clientTemperature = "cTemp"');
 
 

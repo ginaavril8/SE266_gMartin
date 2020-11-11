@@ -87,7 +87,7 @@
     </table>
                     
         <!--<a href="addClient.php">Add Client</a>-->
-        <a href="addClient.php?action=Add" id="add">Add Client</a><h1>
+        <a href="addClient.php?action=add" id="add">Add Client</a><h1>
     </div>
     </div> <!-- End Container Div -->
 
