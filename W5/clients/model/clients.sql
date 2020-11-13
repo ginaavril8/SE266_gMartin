@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS clients (
  (clientMeasurementId INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,        
     clientId INT UNSIGNED,        
     clientMeasurementDate DATE,        
-    clientWeight SMALLINT,        
+    clientWeight SMALLINT(6),        
     clientHeight SMALLINT,        
     clientBPSystolic SMALLINT,        
     clientBPDiastolic SMALLINT,        

@@ -7,7 +7,7 @@ include __DIR__ . '/functions.php';
        
         
         $action = "";
-
+           
             if (isset($_GET['action']))  
             {
                 $action = filter_input(INPUT_GET, 'action');
@@ -60,55 +60,40 @@ include __DIR__ . '/functions.php';
 
                if (isset($_GET['action']))  
                {
-                   $action = filter_input(INPUT_GET, 'action');
-                   //$clientMeasurementId = filter_input(INPUT_GET, 'clientMeasurementId');
+                   $action = filter_input(INPUT_GET, 'action'); 
                    $clientId = filter_input(INPUT_GET, 'clientId');
    
                        if ($action == "update") {
 
                         $clientMeasurements = getClientMeasurements($clientId);
-                           /*$newRow = getClientMeasurement($clientMeasurementId);
-                           $cWeight = $newRow['clientWeight'];
-                           $cHeight = $newRow['clientHeight'];
-                           $bpSystolic = $newRow['bpSystolic'];
-                           $dpDiastolic = $newRow['dpDiastolic'];
-                           $cTemp = $newRow['clientTemp'];*/
+                        
                        }
                        else{
-
-
                             $clientMeasurements = [];
-                            /*$cWeight = "";
-                            $cHeight  = "";
-                            $bpSystolic  = "";
-                            $dpDiastolic  = "";
-                            $cTemp  = "";*/
-                       }
+                             
                     }
+                }
 
 
-                    elseif (isset($_POST['addMeasurments'])) {
+                elseif (isset($_POST['addMeasurments'])) {
+                    
                     $action = filter_input(INPUT_POST, 'action');
-                    //$clientMeasurementId = filter_input(INPUT_POST, 'clientMeasurementId');
                     $clientId = filter_input(INPUT_POST, 'clientId');
-
                     $cWeight = filter_input(INPUT_POST, 'clientWeight');
                     $cHeight  = filter_input(INPUT_POST, 'clientHeight');
                     $bpSystolic  = filter_input(INPUT_POST, 'sPressure');
                     $dpDiastolic  = filter_input(INPUT_POST, 'dPressure');
                     $cTemp  = filter_input(INPUT_POST, 'clientTemp');
-
                     $result = addClientMeasurements ($clientId,  $cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp);
                     $clientMeasurements = getClientMeasurements($clientId);
-            
-                    // }elseif (isset($_POST['deleteClientMeasurement'])) {
-
-                    //     //if(isset($_POST['deleteClientMeasurement']))
-                    //     $deleteClientMeasurement = filter_input(INPUT_POST, 'deleteClientMeasurement');
-                    //     deleteClientMeasurements($deleteClientMeasurement);
-        
-                    // }
+                    
                     }
+                    
+                
+               
+            
+                
+                   
 
                 if (isPostRequest() && $action == "add") {
        
@@ -128,7 +113,6 @@ include __DIR__ . '/functions.php';
                     header('Location: view.php');
             
                 }
-
 
                 if (isset($_POST['deleteClientMeasurement'])) {
  
@@ -217,14 +201,15 @@ include __DIR__ . '/functions.php';
 
     <h2>Client Measurements</h2>
     <form name="measurement" method="post" action="editClient.php" class="">
-    <input type="text" name="action" value="edit">
-    <input type="text" name="clientId" value="<?= $id ?>">
+        <input type="text" name="action" value="edit">
+        <input type="text" name="clientId" value="<?= $id ?>">
+
 
 
 
     <div class="">
     <label>Current Date</label> 
-    <!-- <input type="date" id="todaysDate" name="todaysDate" value="<?= $date?>"/><br> -->
+    
     <br>
     </div>
 
@@ -237,6 +222,7 @@ include __DIR__ . '/functions.php';
     <div class="">
     <label>Height</label> 
     <input type="text" id="cHeight" name="clientHeight" placeholder="Inches" style="width:50px;" value=""/><br>
+    <br>
     </div> 
           
 
@@ -281,11 +267,7 @@ include __DIR__ . '/functions.php';
     <table class="center" style="text-align:center">
             <thead>
             <h2>Client History</h2>
-
-            <?php
-            //$id = filter_input(INPUT_GET, 'id');
-            //$clientMeasurements = getClientMeasurements($id);
-        ?>
+ 
 
 
                 <tr>
@@ -316,7 +298,7 @@ include __DIR__ . '/functions.php';
 
 
                 <td>
-                <form action="editClient.php" method="post">
+                    <form action="editClient.php" method="post">
                         <input type="text" name="id" value="<?= $newRow['clientId'] ?>"/>
                         <input type="text" name="clientMeasurementId" value="<?= $newRow['clientMeasurementId'] ?>"/>
                         <button class="fa fa-remove" style="border:none; background-color:white;" name="deleteClientMeasurement" type="submit" value="">

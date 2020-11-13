@@ -135,6 +135,8 @@
         return ($results);
         }
 
+        
+        
 
 
     function addClientMeasurements ($clientId,  $cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp) {  
@@ -161,7 +163,7 @@
             
             return ($results);
         }
-
+        
 
         function updateClientMeasurements ($clientMeasurementId, $cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp) {
             global $db;
