@@ -38,12 +38,12 @@ function isPostRequest() {
     }
 
 
-    function bmi ($cHeight, $cWeight)
+   /* function bmi ($cHeight, $cWeight)
     {
         $h = $cHeight*0.0254;
         $kilo = $cWeight/2.20462;
         return $kilo/pow($h,2);
-    }
+    }*/
 
 
 

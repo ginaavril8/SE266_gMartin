@@ -119,13 +119,13 @@
 
 //    //------------------------------------------------------------------- MEASUREMENT TABLE FUNCTIONS ----------------------------------------------------
 
-    function getClientMeasurements () {
+    function getClientMeasurements ($clientId) {
         global $db;
         
         $results = [];
-        $stmt = $db->prepare('SELECT clientMeasurementId, clientId, clientMeasurementDate, clientWeight, clientHeight, clientBPSystolic, clientBPDiastolic, clientTemperature FROM clientMeasurements');
-        //try "id" here if it doesnt work or 'clientMeasurementId'
+        $stmt = $db->prepare("SELECT clientMeasurementId, clientId, clientMeasurementDate, clientWeight, clientHeight, clientBPSystolic, clientBPDiastolic, clientTemperature FROM clientMeasurements  WHERE clientId=:clientId");
 
+        $stmt->bindValue(':clientId', $clientId);
 
         if ( $stmt->execute() && $stmt->rowCount() > 0 ) {
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -137,18 +137,17 @@
 
 
 
-    function addClientMeasurements ($cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp) { 
-        //function addClientMeasurements ($cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp) { //$id removed
+    function addClientMeasurements ($clientId,  $cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp) {  
         global $db;
 
         $results = "Not added";
     
-         $stmt = $db->prepare('INSERT INTO clientMeasurements SET clientMeasurementId = ":clientMeasurementId", clientId = ":clientId", clientMeasurementDate  = ":cDate", clientWeight = ":cWeight", clientHeight = ":cHeight", clientBPSystolic = ":bpSystolic", clientBPDiastolic = ":dpDiastolic", clientTemperature = "cTemp"');
+        $stmt = $db->prepare("INSERT INTO clientMeasurements SET  clientId = :clientId, clientMeasurementDate  = NOW(), clientWeight = :cWeight, clientHeight = :cHeight, clientBPSystolic = :bpSystolic, clientBPDiastolic = :dpDiastolic, clientTemperature = :cTemp");
 
 
-        $stmt->bindValue(':clientMeasurementId', $clientMeasurementId);
+        //$stmt->bindValue(':clientMeasurementId', $clientMeasurementId);
         $stmt->bindValue(':clientId', $clientId);
-        $stmt->bindValue(':cDate', date(y-m-d));
+        //$stmt->bindValue(':cDate', date(y-m-d));
         $stmt->bindValue(':cWeight', $cWeight);
         $stmt->bindValue(':cHeight', $cHeight);
         $stmt->bindValue(':bpSystolic', $bpSystolic);
@@ -194,7 +193,7 @@
                 
                 $results = "Client measurements not deleted";
 
-                $stmt = $db->prepare("DELETE FROM clientMeasurements WHERE id=:id");
+                $stmt = $db->prepare("DELETE FROM clientMeasurements WHERE clientMeasurementId=:id");
                 
                 $stmt->bindValue(':id', $id);
                     
@@ -208,25 +207,7 @@
 
 
 
-            function getClientMeasurement($clientMeasurementId) {
-                global $db;
-               
-                $results = [];
-                $stmt = $db->prepare("SELECT clientMeasurementId, clientWeight, clientHeight, clientBPSystolic, clientBPDiastolic, clientTemperature FROM clientMeasurements WHERE clientMeasurementId=:clientMeasurementId");
-                
-                $stmt->bindValue(':clientMeasurementId', $clientMeasurementId);
-                
-                if ( $stmt->execute() && $stmt->rowCount() > 0 ) 
-                {
-                        
-                    $results = $stmt->fetch(PDO::FETCH_ASSOC);
-                                
-                    }
-                    
-                    return ($results);
             
-                }
-                
 
                 
                     
