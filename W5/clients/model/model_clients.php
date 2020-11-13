@@ -137,15 +137,13 @@
 
 
 
-    function addClientMeasurements ($cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp) { //$id removed
+    function addClientMeasurements ($cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp) { 
         //function addClientMeasurements ($cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp) { //$id removed
         global $db;
 
-        //clientMeasurementId, clientId, clientMeasurementDate, clientWeight, clientHeight, clientBPSystolic, clientBPDiastolic, clientTemperature
         $results = "Not added";
     
-        //$stmt = $db->prepare('INSERT INTO clientMeasurements SET clientId = :clientId, clientMeasurementDate = :cDate, clientWeight = :cWeight, clientHeight = :cHeight, clientBPSystolic = :bpSystolic, clientBPDiastolic = :dpDiastolic, clientTemperature = :cTemp;');
-        $stmt = $db->prepare('INSERT INTO clientMeasurements SET clientMeasurementId = ":clientMeasurementId", clientId = ":clientId", clientMeasurementDate  = ":cDate", clientWeight = ":cWeight", clientHeight = ":cHeight", clientBPSystolic = ":bpSystolic", clientBPDiastolic = ":dpDiastolic", clientTemperature = "cTemp"');
+         $stmt = $db->prepare('INSERT INTO clientMeasurements SET clientMeasurementId = ":clientMeasurementId", clientId = ":clientId", clientMeasurementDate  = ":cDate", clientWeight = ":cWeight", clientHeight = ":cHeight", clientBPSystolic = ":bpSystolic", clientBPDiastolic = ":dpDiastolic", clientTemperature = "cTemp"');
 
 
         $stmt->bindValue(':clientMeasurementId', $clientMeasurementId);
@@ -166,15 +164,15 @@
         }
 
 
-        function updateClientMeasurements ($clientId, $cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp) {
+        function updateClientMeasurements ($clientMeasurementId, $cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp) {
             global $db;
     
             $results = "";
             
-            $stmt = $db->prepare('UPDATE clientMeasurements SET clientMeasurementDate = :cDate, clientWeight = :cWeight, clientHeight = :cHeight, clientBPSystolic = :bpSystolic, clientBPDiastolic = :dpDiastolic, clientTemperature = :cTemp WHERE clientId=:clientId;');
+            $stmt = $db->prepare('UPDATE clientMeasurements SET clientMeasurementDate = :cDate, clientWeight = :cWeight, clientHeight = :cHeight, clientBPSystolic = :bpSystolic, clientBPDiastolic = :dpDiastolic, clientTemperature = :cTemp WHERE clientMeasurementId=:clientMeasurementId;');
     
             
-            $stmt->bindValue(':clientId', $clientId);
+            //$stmt->bindValue(':clientMeasurementId', $clientMeasurementId);
             $stmt->bindValue(':cDate', date(y-m-d));
             $stmt->bindValue(':cWeight', $cWeight);
             $stmt->bindValue(':cHeight', $cHeight);
@@ -210,13 +208,13 @@
 
 
 
-            function getClientMeasurement($id) {
+            function getClientMeasurement($clientMeasurementId) {
                 global $db;
                
                 $results = [];
-                $stmt = $db->prepare("SELECT $clientId, $cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp FROM clientMeasurements WHERE id=:id");
+                $stmt = $db->prepare("SELECT clientMeasurementId, clientWeight, clientHeight, clientBPSystolic, clientBPDiastolic, clientTemperature FROM clientMeasurements WHERE clientMeasurementId=:clientMeasurementId");
                 
-                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':clientMeasurementId', $clientMeasurementId);
                 
                 if ( $stmt->execute() && $stmt->rowCount() > 0 ) 
                 {
@@ -229,6 +227,9 @@
             
                 }
                 
+
+                
+                    
 
 
 

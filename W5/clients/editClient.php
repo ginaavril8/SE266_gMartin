@@ -8,16 +8,14 @@ include __DIR__ . '/functions.php';
         
         $action = "";
 
-            // let's figure out if we're doing update or add
             if (isset($_GET['action']))  
             {
                 $action = filter_input(INPUT_GET, 'action');
                 $id = filter_input(INPUT_GET, 'clientId');
 
-                if ($action == "update") {
-                    $row = getClient($id);
                     if ($action == "update") {
                         $row = getClient($id);
+
                         $fName = $row['clientFirstName'];
                         $lName = $row['clientLastName'];
                         $mStatus = $row['clientMarried'];
@@ -36,68 +34,90 @@ include __DIR__ . '/functions.php';
           
                     
                           }
-               }
-                        
-                else if (isset($_POST['action'])) {
+                        }
+                          
+                elseif (isset($_POST['action'])) {
                     $action = filter_input(INPUT_POST, 'action');
-                    $id = filter_input(INPUT_POST, 'clientId'); 
+                    $id = filter_input(INPUT_POST, 'clientId');
                     $fName = filter_input(INPUT_POST, 'FirstName');
                     $lName = filter_input(INPUT_POST, 'LastName');
-                    $mStatus = filter_input(IINPUT_POST, 'mStatus');;
-                    $bDate = filter_input(INPUT_POST, 'BirthDate');
-                    $cDate = filter_input(INPUT_POST, 'todaysDate');
-                } 
-            
-          /*   if (isset($_POST['addClientMeasurements']))
-                {
-                   $id = filter_input(INPUT_GET, 'id'); 
-                   $cDate = filter_input(INPUT_POST, 'todaysDate');
-                   $cWeight = filter_input(INPUT_POST, 'clientWeight');
-                   $cHeight = filter_input(INPUT_POST, 'clientHeight');
-                   $bpSystolic = filter_input(INPUT_POST, 'sPressure');
-                   $dpDiastolic = filter_input(INPUT_POST, 'dPressure');
-                   $cTemp = filter_input(INPUT_POST, 'clientTemp');
-     
-                   $result = addClientMeasurements($id, $cDate, $cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp);
+                    $mStatus = filter_input(INPUT_POST, 'mStatus');
+                    $bDate =  filter_input(INPUT_POST, 'BirthDate');
                 }
-            }
- */
-         
+
+
                 if (isPostRequest() && $action == "add") {
        
-                    $result = addClient ($fName, $lName, $mStatus, $bDate); 
-                    //($cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp);
+                    $result = addClient ($fName, $lName, $mStatus, $bDate);  
+                    header('Location: view.php');
+
+                } elseif (isPostRequest() && $action == "update") {
+                
+                    $result = updateClient ($clientId, $fName, $lName, $mStatus, $bDate); 
+
+                }
+            
+            
+
+
+               if (isset($_GET['action']))  
+               {
+                   $action = filter_input(INPUT_GET, 'action');
+                   $clientMeasurementId = filter_input(INPUT_GET, 'clientMeasurementId');
+   
+                       if ($action == "update") {
+                           $newRow = getClientMeasurement($clientMeasurementId);
+                           $cWeight = $newRow['clientWeight'];
+                           $cHeight = $newRow['clientHeight'];
+                           $bpSystolic = $newRow['bpSystolic'];
+                           $dpDiastolic = $newRow['dpDiastolic'];
+                           $cTemp = $newRow['clientTemp'];
+                       }
+                       else{
+
+                            $cWeight = "";
+                            $cHeight  = "";
+                            $bpSystolic  = "";
+                            $dpDiastolic  = "";
+                            $cTemp  = "";
+                       }
+                    }
+
+
+                elseif (isset($_POST['action'])) {
+                    $action = filter_input(INPUT_POST, 'action');
+                    $clientMeasurementId = filter_input(INPUT_POST, 'clientMeasurementId');
+                    $cWeight = filter_input(INPUT_POST, 'clientWeight');
+                    $cHeight  = filter_input(INPUT_POST, 'clientHeight');
+                    $bpSystolic  = filter_input(INPUT_POST, 'sPressure');
+                    $dpDiastolic  = filter_input(INPUT_POST, 'dPressure');
+                    $cTemp  = filter_input(INPUT_POST, 'clientTemp');
+            
+                    }
+                   
+//rewrite for measurements table
+                if (isPostRequest() && $action == "add") {
+       
+                    $result = addClientMeasurements ($cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp);  
                     header('Location: view.php');
                     
-                } else if (isPostRequest() && $action == "update") {
-                    $result = updateClient ($clientId, $fName, $lName, $mStatus, $bDate);
-                    if(isset($_POST['addClientMeasurements'])){
-
-                        $clientId = filter_input(INPUT_GET, 'clientId'); 
-                        $cDate = filter_input(INPUT_POST, 'todaysDate');
-                        $cWeight = filter_input(INPUT_POST, 'clientWeight');
-                        $cHeight = filter_input(INPUT_POST, 'clientHeight');
-                        $bpSystolic = filter_input(INPUT_POST, 'sPressure');
-                        $dpDiastolic = filter_input(INPUT_POST, 'dPressure');
-                        $cTemp = filter_input(INPUT_POST, 'clientTemp');
-          
-                        $result = addClientMeasurements ($id, $cDate, $cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp);
-                     }
-
-                        //($id, $cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp);
-                        header('Location: view.php');
+                } elseif (isPostRequest() && $action == "update") {
+                    
+                    $result = updateClientMeasurements ($clientMeasurementId, $cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp);
+                    header('Location: view.php');
 
                     }
         
-                } else if (isset($_POST['delete'])){
+                 else if (isset($_POST['delete'])){
 
-                    $del_id = filter_input(INPUT_POST, 'id');
+                    //$del_id = filter_input(INPUT_POST, 'id');
                     deleteClient($id);
                     header('Location: view.php');
             
                 }
                 
             
+
     ?>
 
 
@@ -138,21 +158,19 @@ include __DIR__ . '/functions.php';
 </br>
  
 
- <form method="post" action="editClient.php" class="">
-        <!-- <input type="hidden" name="action" value="<?= $action ?>"> -->
-        <input type="hidden" name="action" value="edit">
-        <input type="hidden" name="clientId" value="<?= $id ?>">
+ <form method="post" action="editClient.php" class=""> 
+        <input type="text" name="action" value="edit">
+        <input type="text" name="clientId" value="<?= $id ?>">
 
     <div class="">
     <label>First Name</label> 
-    <input type="text" name="FirstName" id="FirstName" value="<?= $fName ?>"></br>
+    <input type="text" id="fName" name="FirstName"  value="<?= $fName ?>"></br>
     <br>
  
  
 
-    <label>Last Name</label> 
-    <!-- <input type="text" id="LastName" value="" name="LastName" /><br /> -->
-    <input type="text"  id="LastName" placeholder="" name="LastName" value="<?= $lName ?>"></br>
+    <label>Last Name</label>  
+    <input type="text" id="lName" name="LastName"  placeholder="" value="<?= $lName ?>"></br>
     <br>
 
     </div>
@@ -168,9 +186,11 @@ include __DIR__ . '/functions.php';
 
     <div class="">
     <label>DOB </label>
-<input type="date" id="BirthDate" name="BirthDate" value="<?= $bDate ?>"/><br>
+<input type="date" id="bDate" name="BirthDate" value="<?= $bDate ?>"/><br>
     </br>
     </div>
+
+
 </form>
 
 
@@ -197,7 +217,7 @@ include __DIR__ . '/functions.php';
     
     <div class="">
     <label>Height</label> 
-    <input type="text" id="cHeight" name="cHeight" placeholder="Inches" style="width:50px;" value=""/><?= $cHeight ?><br>
+    <input type="text" id="cHeight" name="clientHeight" placeholder="Inches" style="width:50px;" value="<?= $cHeight ?>"/><br>
     <br>
     </div> 
           
@@ -205,7 +225,7 @@ include __DIR__ . '/functions.php';
 
     <div class="">
     <label>Blood Pressure</label> 
-    <input type="text" id="bpSystolic" name="sPressure" style="width:30px;" value="<?= $dpDiastolic ?>"/>
+    <input type="text" id="bpSystolic" name="sPressure" style="width:30px;" value="<?= $bpSystolic ?>"/>
                 <label>/<label>
     <input type="text" id="dpDiastolic" name="dPressure" style="width:30px;" value="<?= $dpDiastolic ?>"/><br>
 
@@ -271,10 +291,6 @@ include __DIR__ . '/functions.php';
             <?php foreach ($clientMeasurements as $newRow): ?>
                 <tr>
 
-
-  
-
-
                 <form action="editClient.php?action=update&clientId=<?php $id ?>"  method="post">
                     <td><?= $newRow['clientMeasurementId']; ?></td>
                     <td><?= $newRow['clientMeasurementDate']; ?></td>
@@ -288,10 +304,11 @@ include __DIR__ . '/functions.php';
 
                 <td>
                     <form action="view.php" method="post">
-                        <input type="hidden" name="id" value="<?= $row['id'] ?>"/>
-    
+                        <input type="text" name="id" value="<?= $row['id'] ?>"/>
+                        <input type="text" name="clientMeasurementId" value="<?= $newRow['clientMeasurementId'] ?>"/>
 
-                        <button class="fa fa-remove" style="border:none; background-color:white;" name="deleteClientMeasurement" type="submit"></button>
+                        <button class="fa fa-remove" style="border:none; background-color:white;" name="deleteClientMeasurement" type="submit" value="">
+                        </button>
 
 
                     </form>
