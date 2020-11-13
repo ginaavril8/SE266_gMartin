@@ -6,7 +6,10 @@ include __DIR__ . '/model/model_clients.php';
 include __DIR__ . '/functions.php';
        
         
-        $action = "";
+        $action = ""; 
+        $mStatus = "";
+        $fName = "";
+        $lName = "";
            
             if (isset($_GET['action']))  
             {
@@ -66,13 +69,16 @@ include __DIR__ . '/functions.php';
                        if ($action == "update") {
 
                         $clientMeasurements = getClientMeasurements($clientId);
-                        
                        }
-                       else{
-                            $clientMeasurements = [];
+                       else{ 
+
+                            $clientMeasurements = []; 
                              
+                        }
                     }
-                }
+                
+            
+                
 
 
                 elseif (isset($_POST['addMeasurments'])) {
@@ -84,16 +90,20 @@ include __DIR__ . '/functions.php';
                     $bpSystolic  = filter_input(INPUT_POST, 'sPressure');
                     $dpDiastolic  = filter_input(INPUT_POST, 'dPressure');
                     $cTemp  = filter_input(INPUT_POST, 'clientTemp');
+                    
                     $result = addClientMeasurements ($clientId,  $cWeight, $cHeight, $bpSystolic, $dpDiastolic, $cTemp);
+                    
                     $clientMeasurements = getClientMeasurements($clientId);
                     
+                    } else if (isset($_POST['deleteClientMeasurement'])) {
+ 
+                        $clientMeasurementId = filter_input(INPUT_POST, 'clientMeasurementId');
+                        deleteClientMeasurements($clientMeasurementId);
+        
                     }
                     
-                
-               
+                    
             
-                
-                   
 
                 if (isPostRequest() && $action == "add") {
        
@@ -114,13 +124,12 @@ include __DIR__ . '/functions.php';
             
                 }
 
-                if (isset($_POST['deleteClientMeasurement'])) {
+         /*         if (isset($_POST['deleteClientMeasurement'])) {
  
-                    $clientMeasurementId = filter_input(INPUT_POST, 'clientMeasurementId');
-                    deleteClientMeasurements($clientMeasurementId);
+                     $clientMeasurementId = filter_input(INPUT_POST, 'clientMeasurementId');
+                     deleteClientMeasurements($clientMeasurementId);
     
-                }
-                
+                } */
             
 
     ?>
@@ -164,8 +173,8 @@ include __DIR__ . '/functions.php';
  
 
  <form method="post" action="editClient.php" class=""> 
-        <input type="text" name="action" value="edit">
-        <input type="text" name="clientId" value="<?= $id ?>">
+        <input type="hidden" name="action" value="edit">
+        <input type="hidden" name="clientId" value="<?= $id ?>">
 
     <div class="">
     <label>First Name</label> 
@@ -201,27 +210,21 @@ include __DIR__ . '/functions.php';
 
     <h2>Client Measurements</h2>
     <form name="measurement" method="post" action="editClient.php" class="">
-        <input type="text" name="action" value="edit">
-        <input type="text" name="clientId" value="<?= $id ?>">
+        <input type="hidden" name="action" value="edit">
+        <input type="hidden" name="clientId" value="<?= $id ?>">
 
 
-
-
-    <div class="">
-    <label>Current Date</label> 
-    
-    <br>
-    </div>
 
 
     <div class="">
     <label>Weight</label> 
-    <input type="text" id="cWeight" name="clientWeight" style="width:50px;" value=""/><br>
+    <input type="text" id="cWeight" name="clientWeight" style="width:50px;" placeholder="Lbs." value=""/><br>
+    <br>
     </div>    
     
     <div class="">
     <label>Height</label> 
-    <input type="text" id="cHeight" name="clientHeight" placeholder="Inches" style="width:50px;" value=""/><br>
+    <input type="text" id="cHeight" name="clientHeight" placeholder="In." style="width:50px;" value=""/><br>
     <br>
     </div> 
           
@@ -248,10 +251,11 @@ include __DIR__ . '/functions.php';
 
       <div class="">
       <button type="submit" value="addClientMeasurements"  name="addMeasurments" >Add Client Measurement</button>
-       <td>
+      <td>
+
        <form action="view.php" method="post">
        <input type="hidden" name="id" value="<?= $row['id'] ?>"/> 
-                    </form> 
+       </form> 
                 </td>
       </div>
 
@@ -290,8 +294,7 @@ include __DIR__ . '/functions.php';
                     <td><?= $newRow['clientMeasurementId']; ?></td>
                     <td><?= $newRow['clientMeasurementDate']; ?></td>
                     <td><?= $newRow['clientWeight']; ?></td>  
-                    <td><?= $newRow['clientHeight']; ?></td>  
-                    <!-- <td><?= $newRow['clientBPSystolic'], $newRow['clientBPDiastolic'] ?></td> -->
+                    <td><?= $newRow['clientHeight']; ?></td>   
                     <td><?= $newRow['clientBPSystolic']; ?> / <?= $newRow['clientBPDiastolic']; ?></td> 
                     <td><?=  $newRow['clientTemperature']; ?></td> 
                 </form> 
@@ -299,9 +302,9 @@ include __DIR__ . '/functions.php';
 
                 <td>
                     <form action="editClient.php" method="post">
-                        <input type="text" name="id" value="<?= $newRow['clientId'] ?>"/>
-                        <input type="text" name="clientMeasurementId" value="<?= $newRow['clientMeasurementId'] ?>"/>
-                        <button class="fa fa-remove" style="border:none; background-color:white;" name="deleteClientMeasurement" type="submit" value="">
+                        <input type="hidden" name="id" value="<?= $newRow['clientId'] ?>"/>
+                        <input type="hidden" name="clientMeasurementId" value="<?= $newRow['clientMeasurementId'] ?>"/>
+                        <button type="submit" class="fa fa-remove" style="border:none; background-color:white;" name="deleteClientMeasurement"  value="">
 
 
                     </form>
