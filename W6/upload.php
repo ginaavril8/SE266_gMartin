@@ -3,22 +3,20 @@
     include_once __DIR__ . "/models/model_schools.php";
     include_once __DIR__ . "/includes/functions.php"; 
     session_start();
-    
-
- 
-      if (isset ($_FILES['file1'])) {
-          
-          //insertSchoolsFromFile('schools.csv');
-
-          $tmp_name = $_FILES['file1']['tmp_name'];
-          $path = getcwd() .DIRECTORY_SEPARATOR . 'uploads';
-          $new_name = $path . DIRECTORY_SEPARATOR . $_FILES['file1']['name'];
-          move_uploaded_file($temp_name, $new_name);
-          insertSchoolsFromFile($new_name);
-          header('Location: search.php');
-          exit; 
-      } 
   
+  
+  
+          if (isset ($_FILES['file1'])) {
+
+              $tmp_name = $_FILES['file1']['tmp_name'];
+              $path = getcwd() .DIRECTORY_SEPARATOR . 'uploads';
+              $new_name = $path . DIRECTORY_SEPARATOR . $_FILES['file1']['name'];
+              move_uploaded_file($temp_name, $new_name);
+              insertSchoolsFromFile($new_name);
+              header('Location: search.php');
+              exit; 
+          } 
+      
 
     include_once __DIR__ . "/header.php";
  
@@ -52,11 +50,7 @@
         <a class="btns" href="phpR.php">PHP References</a>  
         <a class="btns" href="gitRepo.php">My GitHub Repo</a>  
         <a class="btns" href="otherThings.php">Other Things</a>  
-    <br>
-    <br>
-    <?php if(basename($_SERVER['PHP_SELF']) == 'upload.php'): ?><?php endif; ?><a class="btns"  href="upload.php">Upload</a>
-    <?php if(basename($_SERVER['PHP_SELF']) == 'search.php'): ?><?php endif; ?><a class="btns" href="search.php">Search</a>
-    <a class="btns" href="login.php">Log Off</a>
+        <a class="btns" href="login.php">Log Off</a> 
 
     </div><!-- end botton-container -->	   
        

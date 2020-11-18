@@ -26,7 +26,7 @@ error_reporting(E_ALL ^ E_WARNING);
         }
     } 
 
-       
+    
      
 ?>
 
@@ -61,9 +61,9 @@ error_reporting(E_ALL ^ E_WARNING);
         <a class="btns" href="otherThings.php">Other Things</a>
 <br>
 <br>
-    <?php if(basename($_SERVER['PHP_SELF']) == 'upload.php'): ?><?php endif; ?><a class="btns"  href="upload.php">Upload</a>
+ <!--    <?php if(basename($_SERVER['PHP_SELF']) == 'upload.php'): ?><?php endif; ?><a class="btns"  href="upload.php">Upload</a>
     <?php if(basename($_SERVER['PHP_SELF']) == 'search.php'): ?><?php endif; ?><a class="btns" href="search.php">Search</a>
-    <a class="btns" href="login.php">Log Off</a>    
+    <a class="btns" href="login.php">Log Off</a> -->    
 
     </div><!-- end botton-container -->	   
        
