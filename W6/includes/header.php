@@ -1,9 +1,19 @@
+<?php
+    session_start();
+
+    if($_SESSION['LoggedIn'] == "false"){
+      header('Location: login.php');
+    }
+?>
+
+
+
 
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Main Course</title>
+<title>W6 | Log Off</title>
 <!-- Link to external Stylesheet -->
 <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -14,37 +24,31 @@
 
 <!-- Header Div -->      
 <div class="header"> 
-<h2>PHP & MySQL</h2>
+<h2>Log Off</h2>
 </div><!-- End Header Div -->
 
 
 <!--Navigation Bar-->
     <div class="nav">	  
-        <a class="btns" href="index.php">All Signments</a>        
+        <a class="btns" href="https://se266gam.herokuapp.com/">All Signments</a>        
         <a class="btns" href="githubR.php">GitHub Resources</a>   
         <a class="btns" href="phpR.php">PHP References</a>  
         <a class="btns" href="gitRepo.php">My GitHub Repo</a>  
-        <a class="btns" href="otherThings.php">Other Things</a>  
+        <a class="btns" href="otherThings.php">Other Things</a>
+
+    <br>
+    <?php if(basename($_SERVER['PHP_SELF']) == 'upload.php'): ?><?php endif; ?><a class="btns"  href="upload.php">Upload</a>
+    <?php if(basename($_SERVER['PHP_SELF']) == 'search.php'): ?><?php endif; ?><a class="btns" href="search.php">Search</a>
+    <a class="btns" href="login.php">Log Off</a>  
 
     </div><!-- end botton-container -->	   
-        
+       
+ <!-- Container Div -->
+<div class="container" style="text-align:center;">  
 
 
 
-<!-- Container Div -->
-<div class="container">
-<ul>
-<li><a href="W1/index.php">Week 1</a></li>
-<li><a href="W2/index.php">Week 2</a></li>
-<li><a href="W3/atm.php">Week 3</a></li>
-<li><a href="W4\clients/view.php">Week 4</a></li>
-<li><a href="W5/clients/view.php">Week 5</a></li>
-<li><a href="W6/login.php">Week 6</a></li>
-<li><a href="W7/index.php">Week 7</a></li>
-<li><a href="W8/index.php">Week 8</a></li>
-<li><a href="W9/index.php">Week 9</a></li>
-<li><a href="W10/index.php">Week 10</a></li>
-</ul>
+
 </div> <!-- End Container Div -->
 
 
