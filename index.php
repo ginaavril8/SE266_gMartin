@@ -40,7 +40,7 @@
 <li><a href="W4\clients/view.php">Week 4</a></li>
 <li><a href="W5/clients/view.php">Week 5</a></li>
 <li><a href="W6/login.php">Week 6</a></li>
-<li><a href="W7/index.php">Week 7</a></li>
+<li><a href="W7/FPP.php">Week 7</a></li>
 <li><a href="W8/index.php">Week 8</a></li>
 <li><a href="W9/index.php">Week 9</a></li>
 <li><a href="W10/index.php">Week 10</a></li>

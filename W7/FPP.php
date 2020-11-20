@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>W7</title>
+<title>W7 | Final Project Proposal</title>
 <!-- Link to external Stylesheet -->
 <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -13,7 +13,7 @@
 
 <!-- Header Div -->      
 <div class="header"> 
-<h2>W7</h2>
+<h2>Final Project | Proposal</h2>
 </div><!-- End Header Div -->
 
 
@@ -30,6 +30,18 @@
  <!-- Container Div -->
 <div class="container">  
 
+
+<?php 
+
+$file = 'FinalProjectProposal.pdf';
+$filename = 'FinalProjectProposal.pdf';
+header('Content-type: application/pdf');
+header('Content-Disposition: inline; filename="' . $filename . '"');
+header('Content-Transfer-Encoding: binary');
+header('Accept-Ranges: bytes');
+@readfile($file);
+
+?>
 
 
 </div> <!-- End Container Div -->
