@@ -33,14 +33,11 @@ error_reporting(E_ALL ^ E_WARNING);
 
 
 
-
-
-
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Final</title>
+<title>Login</title>
 <!-- Link to external Stylesheet -->
 <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -59,9 +56,8 @@ error_reporting(E_ALL ^ E_WARNING);
     <div class="nav">	  
         <a class="btns" href="https://se266gam.herokuapp.com/">All Signments</a>          
         <a class="btns" href="gitRepo.php">My GitHub Repo</a>  
-        <a class="btns" href="signoff.php">Menu</a>  
-        <a class="btns" href="signoff.php">Rewards</a>  
-        <a class="btns" href="signoff.php">Sign Out</a>  
+        <a class="btns" href="menu.php">Menu</a>   
+        <a class="btns" href="signup.php">Sign Up</a>
 
     </div><!-- end botton-container -->	   
        
@@ -70,7 +66,7 @@ error_reporting(E_ALL ^ E_WARNING);
 <form method="post" action="login.php">
            
             <div class="">
-                <h3></h3>
+                <h3>Login</h3>
             </div>
             <div class="">
                 <div class="loginLabel">User Name:</div>
@@ -85,27 +81,14 @@ error_reporting(E_ALL ^ E_WARNING);
                 <div class=""><button type="submit" name="login" value="Login" class="">Login</button>
                     <?php
                         if (isPostRequest()) {
-                            echo "Welcome!";
-                        }
-                    ?>
-                
-                </div> 
-   
-            
-            <div class="">
-                <div class="">&nbsp;</div>
-                <div class=""><button type="submit" name="signup" value="SignUp" class=""></button>
-                <?php
-                        if (isPostRequest()) {
-                            header('Location: signup.php');
-                        }
-                    ?>
-                
-                
-                </div> 
-            </div>
-   
 
+                            echo "Welcome back!";
+
+                            header('Location: rewards.php');
+                        }
+                    ?>
+                
+                </div> 
             
       </div>
     </div>

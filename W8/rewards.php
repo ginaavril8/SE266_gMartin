@@ -3,7 +3,6 @@
 
 error_reporting(E_ALL ^ E_WARNING);
 
-//CODE SESSION CORRECTLY
     session_start();
     
     include_once __DIR__ . "/model/model_customers.php";
@@ -14,13 +13,29 @@ error_reporting(E_ALL ^ E_WARNING);
         echo '<img src="images/'.$images.'.png">';
     }
 
+    $fName = filter_input(INPUT_POST, 'FirstName');
+        
+    $customerOrderDate = "";
+    $customerOrderItem = "";
+    $customerReward = "";
+    $results = [];
+    $show = false;
+
+
+    if (isPostRequest()) {
+
+        $customerOrderDate = filter_input(INPUT_POST, '');
+        $customerOrderItem = filter_input(INPUT_POST, '');
+        $customerReward = filter_input(INPUT_POST, '');
     
-    
+        $show = true;
+        $results = getSchools($customerOrderDate, $customerOrderItem, $customerReward);
+
+         
+    }  
     
      
 ?>
-
-
 
 
 
@@ -29,7 +44,7 @@ error_reporting(E_ALL ^ E_WARNING);
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>G & K Cafe | Menu</title>
+<title>G & K Cafe | Rewards</title>
 <!-- Link to external Stylesheet -->
 <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -40,7 +55,7 @@ error_reporting(E_ALL ^ E_WARNING);
 
 <!-- Header Div -->      
 <div class="header"> 
-<h2>Menu</h2>
+<h2>Rewards</h2>
 </div><!-- End Header Div -->
 
 
@@ -48,18 +63,19 @@ error_reporting(E_ALL ^ E_WARNING);
     <div class="nav">	  
         <a class="btns" href="https://se266gam.herokuapp.com/">All Signments</a>          
         <a class="btns" href="gitRepo.php">My GitHub Repo</a>  
-        <a class="btns" href="signoff.php">Rewards</a>  
+        <a class="btns" href="menu.php">Menu</a> 
+        <a class="btns" href="rewards.php">Rewards</a>  
         <a class="btns" href="signoff.php">Sign Out</a>  
 
     </div><!-- end botton-container -->	   
        
  <!-- Container Div -->
 <div class="container" style="text-align:center;">  
-<form method="post" action="menu.php">
-           
+
+
+<form method="post" action="rewards.php">
             <div class="">
-                <!-- <h3><?php echo $username; ?>'s Rewards</h3> -->
-                <h3>Your Rewards</h3>
+                <h3><?php echo $fName; ?>'s Rewards</h3>
             </div>
 
             <div class="reward">
@@ -68,8 +84,33 @@ error_reporting(E_ALL ^ E_WARNING);
                 <h4>Total Rewards: <?=getRewardCount()?></h4>
             </div>
 
-        
 
+        <table class="center" style="text-align:center;">
+
+       <input type="hidden" name="id" value="<?= $row['id'] ?>"/> 
+
+        <thead>
+            <tr>
+                <th>Order Date</th>
+                <th>Order Item</th>
+                <th>Reward</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <?php foreach ($results as $row): ?>
+                <tr>
+                   
+                    <td><?= $row['orderDate']; ?></td>
+                    <td><?= $row['orderItem']; ?></td>
+                    <td><?= $row['reward']; ?></td>
+                
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+        </table>
+    </div>
   </form>
             
 

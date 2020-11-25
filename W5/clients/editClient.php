@@ -256,9 +256,8 @@ include __DIR__ . '/functions.php';
        <form action="view.php" method="post">
        <input type="hidden" name="id" value="<?= $row['id'] ?>"/> 
        </form> 
-                </td>
+      </td>
       </div>
-
 
         <?php
             if (isPostRequest()) {

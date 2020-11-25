@@ -1,6 +1,8 @@
 
 <?php
 error_reporting(E_ALL ^ E_WARNING); 
+
+session_start();
         
         include __DIR__ . '/model/model_customers.php';  
         include __DIR__ . '/include/functions.php';
@@ -24,7 +26,7 @@ error_reporting(E_ALL ^ E_WARNING);
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Rewards</title>
+<title>Sign Up</title>
  <!-- Link to external Stylesheet -->
 <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -41,7 +43,8 @@ error_reporting(E_ALL ^ E_WARNING);
 <!--Navigation Bar -->
     <div class="nav">	  
         <a class="btns" href="https://se266gam.herokuapp.com/">All Signments</a>        
-        <a class="btns" href=".php">Menu</a>   
+        <a class="btns" href="menu.php">Menu</a>   
+        <a class="btns" href="login.php">Login</a> 
  
     </div> <!-- end botton-container -->	   
 
@@ -65,12 +68,12 @@ error_reporting(E_ALL ^ E_WARNING);
 
 
     <label>Username</label> 
-    <input type="text" id="LastName" value="" name="userName" /><br />
+    <input type="text" id="username" value="" name="userName" /><br />
     <br>
 
 
     <label>Password</label> 
-    <input type="text" id="LastName" value="" name="password" /><br />
+    <input type="password" id="password" value="" name="password" /><br />
     <br>
 
 
@@ -88,9 +91,10 @@ error_reporting(E_ALL ^ E_WARNING);
          
       <div class="">
         <button type="submit" name="join" class="">Join</button></br>
+        </br>
         <?php
             if (isPostRequest()) {
-                echo "Welcome!";
+                echo "Welcome, $fName!";
             }
         ?>
       </div>
@@ -98,10 +102,7 @@ error_reporting(E_ALL ^ E_WARNING);
 
 
   </form>
-  
-<div class=""><a href="menu.php">Order here!</a><br>
-</br>
-</div>
+
 
 </div>
 

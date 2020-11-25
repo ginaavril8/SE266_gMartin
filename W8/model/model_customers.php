@@ -6,7 +6,7 @@ error_reporting(E_ALL ^ E_WARNING);
 //------------------------------------------- LOGIN --------------------------------//
 function checkLogin ($username, $password) {
     global $db;
-    $stmt = $db->prepare('SELECT id FROM customers WHERE customerUserame =:userName AND customerPassword = :password');
+    $stmt = $db->prepare('SELECT id FROM customers WHERE customerUsername =:userName AND customerPassword = :password');
 
     $stmt->bindValue(':userName', $username);
     $stmt->bindValue(':password', sha1($password));

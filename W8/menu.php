@@ -47,7 +47,8 @@ error_reporting(E_ALL ^ E_WARNING);
     <div class="nav">	  
         <a class="btns" href="https://se266gam.herokuapp.com/">All Signments</a>          
         <a class="btns" href="gitRepo.php">My GitHub Repo</a>  
-        <a class="btns" href="signoff.php">Rewards</a>  
+        <a class="btns" href="menu.php">Menu</a>  
+        <a class="btns" href="rewards.php">Rewards</a> 
         <a class="btns" href="signoff.php">Sign Out</a>  
 
     </div><!-- end botton-container -->	   
