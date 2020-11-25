@@ -1,8 +1,12 @@
+
+
+
+
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Other Things</title>
+<title>Good-bye!</title>
 <!-- Link to external Stylesheet -->
 <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -13,17 +17,15 @@
 
 <!-- Header Div -->      
 <div class="header"> 
-<h2>PHP & MySQL</h2>
+<h2>G & K Cafe</h2>
 </div><!-- End Header Div -->
 
 
 <!--Navigation Bar-->
     <div class="nav">	  
         <a class="btns" href="https://se266gam.herokuapp.com/">All Signments</a>
-        <a class="btns" href="githubR.php">GitHub Resources</a>    
-        <a class="btns" href="phpR.php">PHP References</a>  
         <a class="btns" href="gitRepo.php">My GitHub Repo</a> 
-        <a class="btns" href="otherThings.php">Other Things</a>  
+        <a class="btns" href=".php">X</a>  
 
     </div><!-- end botton-container -->	   
         
@@ -31,12 +33,25 @@
 
 
 <!-- Container Div -->
-<div class="container">
-<ul>
-<li><a href="https://www.youtube.com/">YouTube</a></li>
-<li><a href="https://www.reddit.com/">Reddit</a></li>
-<li><a href="https://apps.apple.com/us/app/apple-podcasts/id525463029">Podcasts</a></li>
-</ul>
+<div class="container" style="text-align:center;">
+
+
+
+
+<?php
+if (isset($_POST['signoff'])) { //create logoff button
+    session_start();
+    session_unset();
+    session_destroy();
+
+    header('Location: login.php');
+}
+?>
+
+<h1>Come back soon!</h1>
+
+
+
 </div> <!-- End Container Div -->
 
 

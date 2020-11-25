@@ -42,8 +42,8 @@
             
         );
 
-            //var_dump($binds);
-            //exit;
+            var_dump($binds);
+            exit;
 
         if ($stmt->execute($binds) && $stmt->rowCount() > 0) {
             $results = 'Data Added';
@@ -54,9 +54,9 @@
 
 
 
-      /*$results = addClient ('Olivia', 'Reed', 0, '1950-7-8', '70');
+     /*  $results = addClient ('Olivia', 'Reed', 0, '1950-7-8', '70');
       $clients = getClients();
-      var_dump ($clients);*/
+      var_dump ($clients); */
     
    
 
