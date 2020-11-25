@@ -1,5 +1,15 @@
 
+<?php
 
+error_reporting(E_ALL ^ E_WARNING);
+
+    $images = filter_input ( INPUT_GET , 'image' );
+    if (isset($images) && !empty($images)) {
+        echo '<img src="images/'.$images.'.png">';
+    }
+    
+    
+?>
 
 
 <!doctype html>
@@ -25,7 +35,7 @@
     <div class="nav">	  
         <a class="btns" href="https://se266gam.herokuapp.com/">All Signments</a>
         <a class="btns" href="gitRepo.php">My GitHub Repo</a> 
-        <a class="btns" href=".php">X</a>  
+        <a class="btns" href="login.php">Login</a>  
 
     </div><!-- end botton-container -->	   
         
@@ -34,8 +44,6 @@
 
 <!-- Container Div -->
 <div class="container" style="text-align:center;">
-
-
 
 
 <?php
@@ -48,7 +56,10 @@ if (isset($_POST['signoff'])) { //create logoff button
 }
 ?>
 
-<h1>Come back soon!</h1>
+<h1>Until Next Time!</h1>
+            <div class="orderItems">
+                <img src="images/coffeetable<?php echo $images; ?>.png" style="height:90px;"><br>
+            </div>
 
 
 

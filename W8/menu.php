@@ -85,16 +85,8 @@ error_reporting(E_ALL ^ E_WARNING);
             </div>
         
 
-                
-                </div> 
-   
-            </div>
-            
-      </div>
-    </div>
   </form>
             
-</form>
 
 
 </div> <!-- End Container Div -->

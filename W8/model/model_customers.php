@@ -25,18 +25,6 @@ function checkLogin ($username, $password) {
 
     $stmt = $db->prepare("INSERT INTO customers SET customerFirstName = :FirstName, customerLastName = :LastName, customerUsername = :username,  customerPassword = :password, customerEmail = :email, customerBirthDate = :birthday");
 
-
- /*    $binds = array(
-        "FirstName" => $fName,
-        "LastName" => $lName,
-        "username" => $username,
-        "password" => $password,
-        "email" => $email,
-        "birthday" => $birthday,
-        
-    ); */
-
-
     $stmt->bindValue(':FirstName', $fName);
     $stmt->bindValue(':LastName', $lName);
     $stmt->bindValue(':username', $username);
@@ -55,4 +43,14 @@ function checkLogin ($username, $password) {
 
     }
 
+
+
+//-------------------------------------- REWARD COUNT ------------------------------//
+function getRewardCount() {
+    global $db;
+
+    $stmt = $db->query("SELECT COUNT(*) AS customerReward FROM customerOrders");
+    $results = $stmt->fetch(PDO::FETCH_ASSOC);   
+    return($results['customerReward']);
+}
 
