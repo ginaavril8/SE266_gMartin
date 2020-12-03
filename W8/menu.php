@@ -13,8 +13,9 @@ error_reporting(E_ALL ^ E_WARNING);
     if (isset($images) && !empty($images)) {
         echo '<img src="images/'.$images.'.png">';
     }
+
     
-    
+
      
 ?>
 
@@ -64,25 +65,25 @@ error_reporting(E_ALL ^ E_WARNING);
             <div class="orderItems">
                 <div class="orderBtns">Bagel</div>
                 <img src="images/bagel<?php echo $images; ?>.png" style="height:50px;"><br>
-               <button type="submit" name="select" value="select" class="">+</button>
+               <button type="submit" name="bagel" value="bagel" class="">+</button>
             </div>
 
             <div class="orderItems">
                 <div class="orderBtns">Muffin</div>
                 <img src="images/muffin<?php echo $images; ?>.png" style="height:50px;"><br>
-               <button type="submit" name="select" value="select" class="">+</button>
+               <button type="submit" name="muffin" value="muffin" class="">+</button>
             </div>
 
             <div class="orderItems">
                 <div class="orderBtns">Hot Coffee</div>
                 <img src="images/hotcoffee<?php echo $images; ?>.png" style="height:50px;"><br>
-               <button type="submit" name="select" value="select" class="">+</button>
+               <button type="submit" name="hotcoffee" value="hotcoffee" class="">+</button>
             </div>
 
             <div class="orderItems">
                 <div class="orderBtns">Iced Coffee</div>
                 <img src="images/icedcoffee<?php echo $images; ?>.png" style="height:50px;"><br>
-               <button type="submit" name="select" value="select" class="">+</button>
+               <button type="submit" name="icedcoffee" value="icedcoffee" class="">+</button>
             </div>
         
 

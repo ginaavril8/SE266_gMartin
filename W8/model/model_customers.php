@@ -54,3 +54,42 @@ function getRewardCount() {
     return($results['customerReward']);
 }
 
+//---------------------------------- REWARDS HISTORY ------------------------------//
+function getRewards ($customerId) {
+    global $db;
+    
+    $results = [];
+    $stmt = $db->prepare("SELECT customerOrderId, customerId, customerOrderDate, customerOrderItem, customerCharge, customerReward FROM customerOrders  WHERE customerId=:customerId");
+
+    $stmt->bindValue(':customerId', $customerId);
+
+    if ( $stmt->execute() && $stmt->rowCount() > 0 ) {
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    
+    }
+
+    return ($results);
+    }
+    //$customer = getRewards();
+
+
+//------------------------------ ORDERING ITEMS -------------------------------//
+
+
+
+//FUNCTINS WE NEED
+//"Add item/purchase item" function
+
+//Delete item from order function
+
+//Total price function
+
+//Order button/function
+
+//Apply/user rewards function/button (connect it to checkout price/total)
+
+
+
+
+
+

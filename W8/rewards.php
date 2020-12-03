@@ -13,28 +13,30 @@ error_reporting(E_ALL ^ E_WARNING);
         echo '<img src="images/'.$images.'.png">';
     }
 
-    $fName = filter_input(INPUT_POST, 'FirstName');
+    $fName = filter_input(INPUT_GET, 'FirstName');
         
     $customerOrderDate = "";
     $customerOrderItem = "";
-    $customerReward = "";
+    $customerReward = ""; 
     $results = [];
     $show = false;
 
 
     if (isPostRequest()) {
-
-        $customerOrderDate = filter_input(INPUT_POST, '');
-        $customerOrderItem = filter_input(INPUT_POST, '');
-        $customerReward = filter_input(INPUT_POST, '');
+        $customerId = filter_input(INPUT_POST, 'customerId');
+        $customerOrderDate = filter_input(INPUT_GET, '');
+        $customerOrderItem = filter_input(INPUT_GET, '');
+        $customerReward = filter_input(INPUT_GET, '');
     
         $show = true;
-        $results = getSchools($customerOrderDate, $customerOrderItem, $customerReward);
+        $results = getRewards($customerOrderDate, $customerOrderItem, $customerReward);
 
          
-    }  
-    
-     
+    }   
+
+
+
+
 ?>
 
 
@@ -87,7 +89,7 @@ error_reporting(E_ALL ^ E_WARNING);
 
         <table class="center" style="text-align:center;">
 
-       <input type="hidden" name="id" value="<?= $row['id'] ?>"/> 
+        <input type="" name="customerId" value="<?= $row['customerId'] ?>"/>
 
         <thead>
             <tr>
@@ -101,10 +103,12 @@ error_reporting(E_ALL ^ E_WARNING);
 
             <?php foreach ($results as $row): ?>
                 <tr>
-                   
-                    <td><?= $row['orderDate']; ?></td>
-                    <td><?= $row['orderItem']; ?></td>
-                    <td><?= $row['reward']; ?></td>
+                    <!--<form action="" method="post">-->
+                    <!-- <input type="" name="customerId" value="<?php echo $row['customerId']; ?>" /> -->
+
+                    <td><?php echo $row['orderDate']; ?></td>
+                    <td><?php echo $row['orderItem']; ?></td>
+                    <td><?php echo $row['reward']; ?></td>
                 
                 </tr>
             <?php endforeach; ?>
