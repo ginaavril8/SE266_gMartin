@@ -15,20 +15,28 @@ CREATE TABLE IF NOT EXISTS customers (
  CREATE TABLE IF NOT EXISTS customerOrders 
  (customerOrderId INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,        
     customerId INT UNSIGNED,        
-    customerOrderDate DATE,        
-    customerOrderItem NVARCHAR (50),    
-    customerCharge INT,        
-    customerReward INT,                     
+    customerOrderDate DATE,
+    customerOrderQty SMALLINT,
     FOREIGN KEY (customerId) REFERENCES customers(id) ON DELETE CASCADE
+ 
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+
+ CREATE TABLE IF NOT EXISTS orderItems 
+ (orderItemId INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,        
+    itemId INT UNSIGNED,  
+    itemDesc VARCHAR(50),      
+    itemPrice FLOAT,
+    itemSize 
+    
+    SMALLINT,
+    FOREIGN KEY (itemId) REFERENCES customerOrders(customerOrderId) ON DELETE CASCADE
  
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
 
 
 INSERT INTO customers (customerUsername, customerPassword)VALUES ("coffeecustomer", sha1("coffee"));
-
-
-
 
 
 SELECT * FROM customers;

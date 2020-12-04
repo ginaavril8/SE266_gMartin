@@ -49,10 +49,10 @@ error_reporting(E_ALL ^ E_WARNING);
  <!-- Container Div -->
  <div class="container" style="text-align:center;">  
 
-<h3>Customers & Customer Order History</h3>
+<h3>Customers, CustomerOrders & OrderItems</h3>
 
                
-                <img src="images/SQLtables<?php echo $images; ?>.png" style="height:450px;"><br>
+                <img src="images/SQLtables_<?php echo $images; ?>.png" style="height:450px;"><br>
             
 
 
