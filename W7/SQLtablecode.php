@@ -52,7 +52,7 @@ error_reporting(E_ALL ^ E_WARNING);
 <h3>Customers, CustomerOrders & OrderItems</h3>
 
                
-                <img src="images/SQLtables_<?php echo $images; ?>.png" style="height:450px;"><br>
+                <img src="images/Sqltables_<?php echo $images; ?>.png" style="height:450px;"><br>
             
 
 
