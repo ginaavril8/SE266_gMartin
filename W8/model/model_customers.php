@@ -86,7 +86,6 @@ function getRewards ($customerId) {
 
 //Order button/function
 
-//Apply/user rewards function/button (connect it to checkout price/total)
 
 
 
