@@ -27,9 +27,7 @@ CREATE TABLE IF NOT EXISTS customers (
     itemId INT UNSIGNED,  
     itemDesc VARCHAR(50),      
     itemPrice FLOAT,
-    itemSize 
-    
-    SMALLINT,
+    itemSize SMALLINT,
     FOREIGN KEY (itemId) REFERENCES customerOrders(customerOrderId) ON DELETE CASCADE
  
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;

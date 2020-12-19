@@ -84,7 +84,7 @@ error_reporting(E_ALL ^ E_WARNING);
 
                             echo "Welcome back!";
 
-                            header('Location: rewards.php');
+                            header('Location: menu.php');
                         }
                     ?>
                 

@@ -44,8 +44,8 @@
 <li><a href="W7/Wireframes.php">Week 7: Wireframes</a></li>
 <li><a href="W7/TechSpec.php">Week 7: Tech Specs</a></li>
 <li><a href="W7/SQLtablecode.php">Week 7: SQL Tables</a></li>
-<li><a href="W8/index.php">Week 8</a></li>
-<li><a href="W9/index.php">Week 9</a></li>
+<li><a href="W8/login.php">Week 8 | Final Project</a></li>
+<li><a href="W9/votes.php">Week 9 | AJAX</a></li>
 <li><a href="W10/index.php">Week 10</a></li>
 </ul>
 </div> <!-- End Container Div -->

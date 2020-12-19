@@ -22,8 +22,11 @@
      return ($results);
     }
 
+    /*$results = getClients();
+    var_dump($results);
+    exit;*/
 
-    
+
     function addClient ($fName, $lName, $mStatus, $bDate) {
     global $db;
     
